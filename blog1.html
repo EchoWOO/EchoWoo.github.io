@@ -38,59 +38,108 @@
       </div>
     </header>
     <div class="first-content">
-      <div class="pic blog1-picture" style="background: url(assets/images/girl.jpg);">
+      <div class="pic blog1-picture" style="background: url(assets/images/xiao_wu_2018_som_image2.jpg);">
         <div class="overlay"></div>
         <div class="content">
-          <h3>Blog Inspiration</h3>
+          <h3>Digitizing Maps Using Remote Sensing Techniques in ArcMap and R</h3>
         </div>
       </div>
     </div>
     <div class="blogdata">
       <div class="container">
-        <h3> Lorem ipsum Lorem ipsum</h3>
-        <span>12 August 2016 </span>
-        <p> "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, <br>
-          tur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+        <!-- <h4> written during 2018 Azavea’s Summer of Maps Fellowship Program</h4> -->
+        <span>1 October 2018 </span>
+        <p>Manually digitizing maps can be tedious and inaccurate, knowing how to automate the process using ArcMap and R saves a lot of time and can increase the accuracy. This blog provides an approach that uses image processing and remote sensing techniques in R and ArcGIS to digitize image maps – the kind often found in a PDF that provides no way to get at the underlying data. The final output will be georeferenced raster or vector spatial datasets.
         </p>
-        <h5> Nature Lover </h5>
-        <p> "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, <br>
-          tur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"<br><br>
-          Lorem Ipsum" va a dar por resultado muchos sitios web que usan este texto si se encuentran en estado de desarrollo. Muchas versiones han evolucionado a través de los años, algunas veces por accidente, otras veces a propósito (por ejemplo insertándole humor y cosas por el estilo n evolucionado a través de los años, algunas veces por accidente, otras veces a propósito (por ejemplo insertándole humor y cosas por el estilo))
+        <h4> Project background </h4>
+        <p>
+          This summer I worked with Audubon Alaska to complete an ecological analysis of the Arctic National Wildlife Refuge. In this blog, I’ll walk through the process I used to extract data from a historic map of porcupine caribou herd calving areas.
+          <br>
+          <br>
+          Caribous are migratory animals that return to specific locations (calving areas) every spring where pregnant females give birth. Although the highest density calving areas may vary from year to year, caribou return to the same general broader areas, making it important to keep track of both annual variation and inter-annual patterns.
         </p>
       </div>
     </div>
     <div class="picbackground">
       <div class="container">
-        <img src="assets/images/image3.jpg" alt="">
+        <img src="assets/images/xiao_wu_2018_som_image5.png" alt="">
       </div>
     </div>
     <div class="blogsection2">
       <div class="container">
-        <h4> Lorem ipsum blog CraftedThemes!</h4>
+        <h4>General Process</h4>
         <div class="row">
           <div class="items">
             <div class="col-md-6">
-              <img src="assets/images/flower.jpg" alt="">
+              <img src="assets/images/xiao_wu_2018_som_image3.jpg" alt="">
+              <img src="assets/images/ezgif.com-resize-1-232x300.gif" alt="">
+              <img src="assets/images/ezgif.com-optimize-min-768x994.gif" alt="">
+              <img src="assets/images/xiao_wu_2018_som_image2.jpg" alt="">
             </div>
             <div class="col-md-6">
-              <p>Hay muchas variaciones de los pasajes de Lorem Ipsum disponibles, pero la mayoría sufrió alteraciones en alguna manera, ya sea porque se le agregó humor, o palabras aleatorias que no parecen ni un poco creíbles. Si vas a utilizar un pasaje de Lorem Ipsum, necesitás estar seguro de que no hay nada avergonzante escondido en el medio del texto. Todos los generadores de Lorem Ipsum que se encuentran en Internet
-              <h5> Simple is Beautiful </h5>
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+              <p>The general process of digitizing one map includes five steps: crop the image, georeference, image classification, extract the shapes, and smooth the polygons.
+                <br>
+                <br>
+                I included both R and ArcPy code in the descriptions below. Note that you can automate the entire process using batch processing and ModelBuilder in ArcMap.
+                <h4> Step 1: Crop the image </h4>
+                <br>
+                <br>
+                If you only have one historic map and it is in the correct extent you hope to digitize, you are welcome to skip to Step 2. Otherwise, there is a little preparation work to make sure you are only digitizing your map in your area of interests which will also save you a lot of time. There are a lot of graphic design software tools for editing images, for example, Adobe Creative Cloud, IrfanView, Paint, Inkscape, etc. I use the open source tools available in R.You can adjust contrast, lightness, and saturation first using an R package, magick, then crop your image, split images into separate files, and export them into different formats using another package gdalUtils.
+                <br>
+                <br>
+                <h4> Step 2: Georeference the images </h4>
+                <br>
+                <br>
+                Scanned maps and PDFs of historical data usually do not contain spatial reference information. Hence you will need to georeference your map before digitizing it. In this step, I will use the georeference toolbar in ArcMap. You can add a base map layer or some other dataset with coordinates to get the context when you assign the coordinate system to the map frame.
+                <br>
+                <br>
+                If you have a series of maps of the same location, saving the links to a text file will be very helpful. You can then use the .txt file in the warp from file tool for batch processing, and then write ArcPy code or ModelBuilder model to automate the process. Here is the example of using ArcPy, you can replace the names of the files and run it in the Python Window in ArcCatalog:
+                <br>
+                <br>
+                <h4> Step 3: Iso cluster and maximum likelihood classification </h4>
+                <br>
+                <br>
+                Iso cluster performs clustering of the multivariate data in the list of input raster. The specified number of classes value is the maximum number of the clusters that can result from the clustering process. The optimal number of classes should be greater than two but is usually found after testing some numbers, analyzing the resulting clusters and retrying the function. Maximum likelihood classification tool will then use the signature file produced from Iso Cluster to produce the optimal number of classes in an output raster.
+                <br>
+                <br>
+                If you have a series of maps using the same color theme, the shape you hope to extract from the maps will have the same value in each final output raster. Here is the code in ArcPy:
+                <br>
+                <br>
+                <h4> Step 4: Extract the shapes </h4>
+                <br>
+                <br>
+                You now have the output raster from ArcMap,  the next step is to extract the shapes. I recommend you use focal statistics tools before you use raster calculator to extract them into a new raster file because they usually have rough edges. For example, you can use focal statistics majority and circle neighborhood to smooth the shapes. Depending on the data you have, you can try with a smaller radius but do it multiple times until you get a satisfying result. After this, you can use raster calculator to extract the shapes you want into a new raster.
+                <br>
+                <br>
+                <h4> Step 5: Export and Smooth polygon </h4>
+                <br>
+                <br>
+                If you want the final result to be shapefiles, here is one more step after you get the raster files in using raster to polygon tool. You can then play with the smooth polygon tool to smooth the boundary.
+                <br>
+                <br>
+                Here are the smoothed polygons of caribou calving extent.
+                <br>
+                <br>
+                If you finished all the steps, congratulations, you have successfully digitized your maps! Here is a map showing the historical distribution of caribou in one map.
+                <h4> Other options </h4>
+                <br>
+                <br>
+                This blog is only an exploratory approach to demonstrate how to digitize non-georeferenced maps into geospatial datasets. I choose to georeference first and then do classification in ArcMap. There are still a lot of other ways, for example, you can extract shapes into vectors using Image Trace tool in Adobe Illustrator and then georeference the vector data in ArcMap. That will make the editing process easier but might be harder to automate if you have a series of maps.
               </p>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="blogsection3">
+    <!-- <div class="blogsection3">
       <div class="container">
         <div class="row">
           <div class="items">
             <div class="col-md-6">
               <p>
                 Hay muchas variaciones de los pasajes de Lorem Ipsum disponibles, pero la mayoría sufrió alteraciones en alguna manera, ya sea porque se le agregó humor, o palabras aleatorias que no parecen ni un poco creíbles. Si vas a utilizar un pasaje de Lorem Ipsum, necesitás estar seguro de que no hay nada avergonzante escondido en el medio del texto. Todos los generadores de Lorem Ipsum que se encuentran en Internet
-              <h5> Simple is Beautiful </h5>
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+              <!-- <h5> Simple is Beautiful </h5> -->
+              <!-- Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
               </p>
             </div>
             <div class="col-md-6">
@@ -99,14 +148,14 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="blogsection4">
+    </div> --> -->
+    <!-- <div class="blogsection4">
       <div class="container">
         <div class="items">
           <h3> 2 Comments</h3>
           <p>Join the discussion and tell us your opinion.</p>
-        </div>
-        <div class="row">
+        </div> -->
+        <!-- <div class="row">
           <div class="col-md-2">
             <div class="picture">
               <img src="assets/images/portret22.png" alt="">
@@ -119,8 +168,8 @@
             <p>Great Theme!</p>
             </div>
           </div>
-        </div>
-         <div class="row items4">
+        </div> -->
+         <!-- <div class="row items4">
           <div class="col-md-2">
             <div class="picture">
               <img src="assets/images/portreti23.png" alt="">
@@ -133,9 +182,9 @@
             <p>Nice job Guys, i love it so much very simple template!</p>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+        </div> -->
+      <!-- </div>
+    </div> -->
     <div class="contact-content">
       <div class="container">
       <h5 class="item">Leave a reply</h5>
