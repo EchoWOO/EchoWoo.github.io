@@ -776,7 +776,7 @@ header .menu ul li ul li ul {
     font-family: 'Raleway', sans-serif;
 }
 .about-fourth-content {
-    background-color: #707B7C;
+    background-color: #f0f2f5;
 }
 
 .about-fourth-content img {
@@ -793,13 +793,13 @@ header .menu ul li ul li ul {
     font-size: 25px;
     padding-top: 70px;
     padding-bottom: 30px;
-    color: #F2F3F4;
+    color: #000000;
     letter-spacing: 1px;
     text-transform: uppercase;
 }
 .about-fourth-content .frame p {
     padding: 20px 50px;
-    color: #F2F3F4;
+    color: #000000;
 }
 .about-sixth-content h4 {
     font-size: 23;
