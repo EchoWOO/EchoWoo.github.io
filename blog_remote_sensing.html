@@ -50,8 +50,7 @@
       </div>
     </div>
     <div class="blogdata">
-      <div class="container">
-        <!-- <h4> written during 2018 Azavea’s Summer of Maps Fellowship Program</h4> -->
+      <!-- <div class="container">
         <span>1 October 2018 </span>
         <p>Manually digitizing maps can be tedious and inaccurate, knowing how to automate the process using ArcMap and R saves a lot of time and can increase the accuracy. This blog provides an approach that uses image processing and remote sensing techniques in R and ArcGIS to digitize image maps – the kind often found in a PDF that provides no way to get at the underlying data. The final output will be georeferenced raster or vector spatial datasets.
         </p>
@@ -62,25 +61,40 @@
           <br>
           Caribous are migratory animals that return to specific locations (calving areas) every spring where pregnant females give birth. Although the highest density calving areas may vary from year to year, caribou return to the same general broader areas, making it important to keep track of both annual variation and inter-annual patterns.
         </p>
-      </div>
+      </div> -->
     </div>
     <div class="picbackground">
       <div class="container">
-        <img src="assets/images/xiao_wu_2018_som_image5.png" alt="">
+        <!-- <img src="assets/images/xiao_wu_2018_som_image5.png" alt=""> -->
       </div>
     </div>
     <div class="blogsection2">
       <div class="container">
-        <h4>General Process</h4>
         <div class="row">
           <div class="items">
-            <div class="col-md-3">
-              <img src="assets/images/xiao_wu_2018_som_image3.jpg" alt="">
-              <img src="assets/images/ezgif.com-resize-1-232x300.gif" alt="">
-              <img src="assets/images/ezgif.com-optimize-min-768x994.gif" alt="">
-              <img src="assets/images/xiao_wu_2018_som_image2.jpg" alt="">
+            <div class="col-md-4">
+              <div class="line"></div>
+              <h6>
+                <em>Dec 2018</br>
+                  <br>
+                  Instructor: Allison Lassiter</br>
+                  <br>
+                  Tag: Remote Sensing
+                </em>
+              </h6>
+
             </div>
-            <div class="col-md-9">
+            <div class="col-md-8">
+                <p>Manually digitizing maps can be tedious and inaccurate, knowing how to automate the process using ArcMap and R saves a lot of time and can increase the accuracy. This blog provides an approach that uses image processing and remote sensing techniques in R and ArcGIS to digitize image maps – the kind often found in a PDF that provides no way to get at the underlying data. The final output will be georeferenced raster or vector spatial datasets.
+                </p>
+                <h4> Project background </h4>
+                <p>
+                  This summer I worked with Audubon Alaska to complete an ecological analysis of the Arctic National Wildlife Refuge. In this blog, I’ll walk through the process I used to extract data from a historic map of porcupine caribou herd calving areas.
+                  <br>
+                  <br>
+                  Caribous are migratory animals that return to specific locations (calving areas) every spring where pregnant females give birth. Although the highest density calving areas may vary from year to year, caribou return to the same general broader areas, making it important to keep track of both annual variation and inter-annual patterns.
+                </p>
+              <h4>General Process</h4>
               <p>The general process of digitizing one map includes five steps: crop the image, georeference, image classification, extract the shapes, and smooth the polygons.
                 <br>
                 <br>
@@ -90,6 +104,10 @@
                 <br>
                 If you only have one historic map and it is in the correct extent you hope to digitize, you are welcome to skip to Step 2. Otherwise, there is a little preparation work to make sure you are only digitizing your map in your area of interests which will also save you a lot of time. There are a lot of graphic design software tools for editing images, for example, Adobe Creative Cloud, IrfanView, Paint, Inkscape, etc. I use the open source tools available in R.You can adjust contrast, lightness, and saturation first using an R package, magick, then crop your image, split images into separate files, and export them into different formats using another package gdalUtils.
                 <br>
+                <img src="assets/images/xiao_wu_2018_som_image3.jpg" alt="">
+                <img src="assets/images/ezgif.com-resize-1-232x300.gif" alt="">
+                <img src="assets/images/ezgif.com-optimize-min-768x994.gif" alt="">
+                <img src="assets/images/xiao_wu_2018_som_image2.jpg" alt="">
                 <br>
                 <h4> Step 2: Georeference the images </h4>
                 <br>
