@@ -42,10 +42,15 @@
       </div>
     </header>
     <div class="first-content">
-      <div class="pic blog1-picture" style="background: url(assets/images/xiao_wu_2018_som_image2.jpg);">
+      <div class="pic blog1-picture" style="background: url(assets/images/PhillySingle.png);">
         <div class="overlay"></div>
         <div class="content">
-          <h3>Digitizing Maps Using Remote Sensing Techniques in ArcMap and R</h3>
+          <h3>Greening Philadelphia Navy Yard:<br/>
+            <br>
+            Measuring Impacts of <br/>
+            <br>
+            Landscape Projects
+          </h3>
         </div>
       </div>
     </div>
@@ -85,14 +90,27 @@
 
             </div>
             <div class="col-md-8">
-                <p>Manually digitizing maps can be tedious and inaccurate, knowing how to automate the process using ArcMap and R saves a lot of time and can increase the accuracy. This blog provides an approach that uses image processing and remote sensing techniques in R and ArcGIS to digitize image maps – the kind often found in a PDF that provides no way to get at the underlying data. The final output will be georeferenced raster or vector spatial datasets.
-                </p>
-                <h4> Project background </h4>
                 <p>
-                  This summer I worked with Audubon Alaska to complete an ecological analysis of the Arctic National Wildlife Refuge. In this blog, I’ll walk through the process I used to extract data from a historic map of porcupine caribou herd calving areas.
+                  How does the landscape projects change in an urban environment? In this project, I used a simple and also most popular indicator in remote sensing,  normalized difference vegetation index, also known as NDVI to examine the change and impact of greenness in the landscape projects in the Navy Yard. <br/>
+                  <br>
+                  I selected my site in the Navy Yard because of its dynamic and urban development in the past 20 years. It used to be a highly industrialized site as the birthplace of the US navy. About 20 years ago, the Navy Yard started the transition from a historical industrial site into a business campus committed to smart energy innovation and sustainability. By analyzing the NDVI change in the Navy Yard, we could possibly see the gradual transition of landscape at a landscape project scale.
                   <br>
                   <br>
-                  Caribous are migratory animals that return to specific locations (calving areas) every spring where pregnant females give birth. Although the highest density calving areas may vary from year to year, caribou return to the same general broader areas, making it important to keep track of both annual variation and inter-annual patterns.
+                  <center><img src="assets/images/remote_sensing_01.png" style="max-width:80%;" alt="Navy Yard landscape projects timeline"></center>
+                </p>
+                <h4> NDVI calculation </h4>
+                <p>
+                  NDVI is short for normalized difference vegetation index. It is a simple graphical indicator that can be used to analyze remote sensing measurements. NDVI measures the difference between near-infrared (which vegetation strongly reflects) and red light (which vegetation absorbs) and. As the following formula indicates, NDVI uses the NIR and red channels in its calculation:
+                  <br>
+                  <center><img src="assets/images/remote_sensing_02.png" style="max-width:20%;" alt="Navy Yard landscape projects timeline"></center>
+                  <br>
+                  This results in a number between 1 and -1, where pixels with high photosynthetic activity have a high NDVI.  For example, the areas with NDVI values less than 0.1 are usually barren rock, sand, or snow. The areas with relatively higher NDVI values, approximately ranging from 0.2 to 0.5, are usually sparse vegetation, such as shrubs and grasslands or decaying crops. The high NDVI values, approximately 0.6 to 0.9, are usually dense vegetation such as those found in temperate and tropical forests or crops at their peak growth stage.<br/>
+                  <br>
+                  NDVI also has its limitation because it is easily affected by water and moisture. For example, the water on the ground and moisture in the air. Therefore, it is very possible that in one wet year, the NDVI can be a lot higher than the other normal years. In addition to the noise like wetness, the other contributors to the NDVI like the real greening trends, the abrupt change caused by the human activities, the vegetation growth and weather change might also be hard to be separated from the NDVI value, <br/>
+                  <br>
+                  To compare the NDVI throughout time, we used three different ways to get NDVI, using Google Earth Engine Code Editor and RStudio. The data source is the USGS Landsat 7 data. The first way for calculating NDVI is to use the Google Earth Engine mathematical functions to get the normalized difference value for each satellite imagery and then calculate the mean. The second way is based on the first calculation method but apply the cloud mask before getting the mean value of all the NDVI calculations. The third way is to use the USGS Landsat 7 NDVI data directly. Please refer to the previous blogs for more details about the major tools and calculation methods.<br/>
+                  <br>
+                  By comparing the three different NDVI results, I find the NDVI calculated from USGS landsat 7 the most consistent with the most logical values over time. I will use it as the best measurement for the urban landscape change in the Navy Yard. <br/>
                 </p>
               <h4>General Process</h4>
               <p>The general process of digitizing one map includes five steps: crop the image, georeference, image classification, extract the shapes, and smooth the polygons.
@@ -102,12 +120,9 @@
                 <h4> Step 1: Crop the image </h4>
                 <br>
                 <br>
-                If you only have one historic map and it is in the correct extent you hope to digitize, you are welcome to skip to Step 2. Otherwise, there is a little preparation work to make sure you are only digitizing your map in your area of interests which will also save you a lot of time. There are a lot of graphic design software tools for editing images, for example, Adobe Creative Cloud, IrfanView, Paint, Inkscape, etc. I use the open source tools available in R.You can adjust contrast, lightness, and saturation first using an R package, magick, then crop your image, split images into separate files, and export them into different formats using another package gdalUtils.
+                If you only have one historic map and it is in the correct extent you hope to digitize, you are welcome to skip to Step 2. Otherwise, there is a little preparation work to make sure you are only digitizing your map in your area of interests which will also save you a lot of time. There are a lot of graphic design software tools for editing images, for example, Adobe Creative Cloud, IrfanView, Paint, Inkscape, etc. I use the open source tools available in R.You can adjust contrast, lightness, and saturation first using an R package, magick, then crop your image, split images into separate files, and export them into different formats using another package gdalUtils.<br/ >
                 <br>
-                <img src="assets/images/xiao_wu_2018_som_image3.jpg" alt="">
-                <img src="assets/images/ezgif.com-resize-1-232x300.gif" alt="">
-                <img src="assets/images/ezgif.com-optimize-min-768x994.gif" alt="">
-                <img src="assets/images/xiao_wu_2018_som_image2.jpg" alt="">
+                <center><img src="assets/images/xiao_wu_2018_som_image3.jpg" style="max-width:80%;" alt="formula of NDVI"></center>
                 <br>
                 <h4> Step 2: Georeference the images </h4>
                 <br>
