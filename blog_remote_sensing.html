@@ -111,57 +111,67 @@
                   To compare the NDVI throughout time, we used three different ways to get NDVI, using Google Earth Engine Code Editor and RStudio. The data source is the USGS Landsat 7 data. The first way for calculating NDVI is to use the Google Earth Engine mathematical functions to get the normalized difference value for each satellite imagery and then calculate the mean. The second way is based on the first calculation method but apply the cloud mask before getting the mean value of all the NDVI calculations. The third way is to use the USGS Landsat 7 NDVI data directly. Please refer to the previous blogs for more details about the major tools and calculation methods.<br/>
                   <br>
                   By comparing the three different NDVI results, I find the NDVI calculated from USGS landsat 7 the most consistent with the most logical values over time. I will use it as the best measurement for the urban landscape change in the Navy Yard. <br/>
-                </p>
-              <h4>General Process</h4>
-              <p>The general process of digitizing one map includes five steps: crop the image, georeference, image classification, extract the shapes, and smooth the polygons.
+              <h4>The General Trend of Greening in the Navy Yard</h4>
+              <p>To answer the question of what is the general trend of greening in the Navy Yard, I used density plots to visualize the distribution of NDVI changing over time. The workflow is shown in the diagram as follows. The density plot is a variation of a histogram that uses kernel smoothing to plot values, allowing for smoother distribution by smoothing out the noise. To minimize the noise effect on visualizing the general trend, I also standardized the dataset to get rid of the noise. If the greenness in the Navy Yard doesn’t change over time, the distribution before and after standardization should look the same.
                 <br>
                 <br>
-                I included both R and ArcPy code in the descriptions below. Note that you can automate the entire process using batch processing and ModelBuilder in ArcMap.
-                <h4> Step 1: Crop the image </h4>
+                By comparing the density plots before and after standardization, we can clearly observe the difference across the years. Therefore, we can conclude that the NDVI did change across the years from 1999 to 2018. </h4>
                 <br>
                 <br>
-                If you only have one historic map and it is in the correct extent you hope to digitize, you are welcome to skip to Step 2. Otherwise, there is a little preparation work to make sure you are only digitizing your map in your area of interests which will also save you a lot of time. There are a lot of graphic design software tools for editing images, for example, Adobe Creative Cloud, IrfanView, Paint, Inkscape, etc. I use the open source tools available in R.You can adjust contrast, lightness, and saturation first using an R package, magick, then crop your image, split images into separate files, and export them into different formats using another package gdalUtils.<br/ >
+                I also plotted the mean value of each year in this line graph. Then used a loess function to fit each years’mean values. We can see the greenness of navy yard experienced continuous increasing from 1999 to 2005. And then experienced small changes but mostly consistent for the rest of the year. Generally, the NDVI trend is keeping increasing. That is to say, the Navy Yard is getting greener and greener from 1999 to 2018.<br/ >
                 <br>
-                <center><img src="assets/images/xiao_wu_2018_som_image3.jpg" style="max-width:80%;" alt="formula of NDVI"></center>
-                <br>
-                <h4> Step 2: Georeference the images </h4>
+                <h4> The landscape Projects Change Overtime </h4>
                 <br>
                 <br>
-                Scanned maps and PDFs of historical data usually do not contain spatial reference information. Hence you will need to georeference your map before digitizing it. In this step, I will use the georeference toolbar in ArcMap. You can add a base map layer or some other dataset with coordinates to get the context when you assign the coordinate system to the map frame.
+                We have seen the NDVI in the Navy Yard increasing over time, but how does each individual landscape project change over time? I used the same NDVI dataset calculated from Google Earth Engine. I then created a point cloud shapefile to extract the values of each location from 1999 to 2018 to visualize the change of NDVI over time by line graphs and density plots. By comparing the satellite imagery and the NDVI line graph, we can clearly see the NDVI change corresponding to the certain landscape construction events at each landscape project scale.
                 <br>
                 <br>
-                If you have a series of maps of the same location, saving the links to a text file will be very helpful. You can then use the .txt file in the warp from file tool for batch processing, and then write ArcPy code or ModelBuilder model to automate the process. Here is the example of using ArcPy, you can replace the names of the files and run it in the Python Window in ArcCatalog:
+                1. The Central Green</br>
+                The site of Central Green used to be houses in 1999, but the houses were removed after 2002. The site remained as a green area covered with vegetation until 2010, when central green started construction. In 2015 the park as was finally completed and officially opened to the public.<br/>
+                <br>
+                From the line graph on the Central Green NDVI change, we can clearly read the site history from the mean NDVI of each year. The NDVI increased after the buildings on the site was removed until the construction of the central green started. Then NDVI begins to drop until the construction was finished. After completion, the NDVI came back to increasing again. Which is exactly the same with our estimation of how parks usually changes the greenness of a site.
                 <br>
                 <br>
-                <h4> Step 3: Iso cluster and maximum likelihood classification </h4>
+                2. The League Island Park</br>
+                The league island park was designed by wells appel and Philadelphia Water department. It has an area of 2.5 acres and performs an important role in storm water collection for the Navy Yard. From the timeline of the League island park, we can see it also experienced great changes in the past 2 years. The site used to be covered with sparse vegetation. Then temporary buildings were constructed but was also soon removed. The League Island park started construction in 2012, completed in the next year and was opened to public in 2014.<br/>
+                <br>
+                Similarly, we can also see a trend like central green in League Island Park’s NDVI line graph. In 2012, when construction of the park started, the NDVI began to drop, but the construction period of the the League Island park was much shorter, so the NDVI started to increase soon after the park was officially opened to the public.<br/>
                 <br>
                 <br>
-                Iso cluster performs clustering of the multivariate data in the list of input raster. The specified number of classes value is the maximum number of the clusters that can result from the clustering process. The optimal number of classes should be greater than two but is usually found after testing some numbers, analyzing the resulting clusters and retrying the function. Maximum likelihood classification tool will then use the signature file produced from Iso Cluster to produce the optimal number of classes in an output raster.
+                3. The Crescent Park</br>
+                The crescent park is another park designed by Wells Appel with an area of 3.46 acre. It was one of the first parks completed in the Navy yard designed as green infrastructure and to improve the environmental quality of the business area. From the historical images of the crescent park, we can see that it also experienced the removal of site buildings, a process of returning the site to public as green open space and finally become a park with green infrastructure.<br/>
+                <br>
+                The crescent park NDVI is different from all the other parks, it almost did not experience any decreasing of the value but keeps increasing throughout the time. This might because most of the park is designed to be sunny lawn with less shrub and trees, which is similar to the condition before the park was built. So the NDVI did not decrease during the process.<br/>
                 <br>
                 <br>
-                If you have a series of maps using the same color theme, the shape you hope to extract from the maps will have the same value in each final output raster. Here is the code in ArcPy:
+                4. The Marine Parade Ground</br>
+                The last park, the marine parade ground is an historic site. The site saw the growth of the us navy and has remained an open space ever since the Navy Yard was constructed. From the timeline of historic images of the marine parade ground. We can see that the context of the park changed a lot during the time, but the park itself remained the same throughout the time. The park was intentionally left there without design because of its special historical meanings. From 2010 to 2014, some of the trees on the site were removed probably because they died or new renovation was made.<br/>
+                <br>
+                From the NDVI line plots, we see the NDVI is generally increasing except the period between 2010 2014. That was the time when the trees on the site was removed. In the rest of the time the NDVI is increasing. Therefore, we can conclude that the greenness trend of marine parade ground is getting greener and greener.<br/>
+                <br>
+                <h4> Validating the Results </h4>
                 <br>
                 <br>
-                <h4> Step 4: Extract the shapes </h4>
+                To get a better sense of how the NDVI value represents the site greenness condition, I also went to the site to valid the result. I compared the different NDVI values at various locations with what is really on the site. Through the comparison we can see that the NDVI is a good reflection of the vegetation condition at each location.</br>
+                <br>
+                For example, the areas with lawns and shrubs has a value of 0.32</br>
+                <br>
+                And a grassland without too much human intervention can be as high as 0.62. Therefore, what we see from the site indicates that NDVI is just an indicator of vegetation quantity and health, but not the greenness quality.<br>
+                <br>
+                To help people get a better understanding how NDVI performs at each location in the Navy Yard, I developed a very simple web application to compare the value of each location with satellite images. You can check it out here. This simple web app realized the function of syncing the satellite imagery and the NDVI map with the mouse movement, so that people can get a clear understanding of what is exactly at the low NDVI locations.<br>
+                <br>
+                <h4>Conclusions</h4>
                 <br>
                 <br>
-                You now have the output raster from ArcMap,  the next step is to extract the shapes. I recommend you use focal statistics tools before you use raster calculator to extract them into a new raster file because they usually have rough edges. For example, you can use focal statistics majority and circle neighborhood to smooth the shapes. Depending on the data you have, you can try with a smaller radius but do it multiple times until you get a satisfying result. After this, you can use raster calculator to extract the shapes you want into a new raster.
+                This study is a proof of concept to examine if NDVI is the best measurement of landscape change overtime. We can clearly see the parks and the Navy Yard getting greener, however, the higher NDVI values do not indicate the landscape quality is getting higher. At the human perception level, NDVI might not be the best.
                 <br>
                 <br>
-                <h4> Step 5: Export and Smooth polygon </h4>
+                I also understand there are limitations of this study. For example, the resolution of the satellite imagery and the noise in the satellite images themselves. We are also omitting some NDVI values by just looking at the mean value.
                 <br>
                 <br>
-                If you want the final result to be shapefiles, here is one more step after you get the raster files in using raster to polygon tool. You can then play with the smooth polygon tool to smooth the boundary.
+                There are still lots of potential to improve this project. There is also one question I would leave here for you if you are interested in observing the landscape change in the urban environment. If NDVI is not the best in representing the greenness at the project level, which will be the best?
                 <br>
                 <br>
-                Here are the smoothed polygons of caribou calving extent.
-                <br>
-                <br>
-                If you finished all the steps, congratulations, you have successfully digitized your maps! Here is a map showing the historical distribution of caribou in one map.
-                <h4> Other options </h4>
-                <br>
-                <br>
-                This blog is only an exploratory approach to demonstrate how to digitize non-georeferenced maps into geospatial datasets. I choose to georeference first and then do classification in ArcMap. There are still a lot of other ways, for example, you can extract shapes into vectors using Image Trace tool in Adobe Illustrator and then georeference the vector data in ArcMap. That will make the editing process easier but might be harder to automate if you have a series of maps.
               </p>
               <br>
               <br>
