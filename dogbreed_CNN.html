@@ -1,0 +1,302 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148964531-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-148964531-1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Xiao WU</title>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&appId=2432399083751070&autoLogAppEvents=1"></script>
+    <link href='https://fonts.googleapis.com/css?family=Quicksand:400,700|Quattrocento+Sans:400,700|Palanquin:400,600|Raleway|Josefin+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="assets/css/font-awesome.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.css">
+    <link rel="stylesheet" href="assets/css/owl.theme.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script> -->
+    </head>
+  <body>
+
+
+
+    <header>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="logo">
+              <h2><a href="index.html">Xiao WU</a></h2>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div id="menu" class="menu">
+              <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">Resume</a></li>
+                <li><a href="portfolio-4.html">Portfolio</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="first-content">
+      <div class="pic blog1-picture" style="background: url(assets/images/dogbreed_CNN_1.jpg);">
+        <div class="overlay"></div>
+        <div class="content">
+          <h3>A Dog Breed Classifier<br/>
+            <br>
+            Using Convolutional Neural Network
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div class="blogdata">
+      <!-- <div class="container">
+        <span>1 October 2018 </span>
+        <p>Manually digitizing maps can be tedious and inaccurate, knowing how to automate the process using ArcMap and R saves a lot of time and can increase the accuracy. This blog provides an approach that uses image processing and remote sensing techniques in R and ArcGIS to digitize image maps – the kind often found in a PDF that provides no way to get at the underlying data. The final output will be georeferenced raster or vector spatial datasets.
+        </p>
+        <h4> Project background </h4>
+        <p>
+          This summer I worked with Audubon Alaska to complete an ecological analysis of the Arctic National Wildlife Refuge. In this blog, I’ll walk through the process I used to extract data from a historic map of porcupine caribou herd calving areas.
+          <br>
+          <br>
+          Caribous are migratory animals that return to specific locations (calving areas) every spring where pregnant females give birth. Although the highest density calving areas may vary from year to year, caribou return to the same general broader areas, making it important to keep track of both annual variation and inter-annual patterns.
+        </p>
+      </div> -->
+    </div>
+    <div class="picbackground">
+      <div class="container">
+        <!-- <img src="assets/images/xiao_wu_2018_som_image5.png" alt=""> -->
+      </div>
+    </div>
+    <div class="blogsection2">
+      <div class="container">
+        <div class="row">
+          <div class="items">
+            <div class="col-md-4">
+              <div class="line"></div>
+              <h6>
+                <em>Feb 2020</br>
+                  <br>
+                  Data Source: <a href="https://github.com/udacity/dog-project">Udacity</a></br>
+                  <br>
+                  Tag: Data Science
+                </em>
+              </h6>
+            </div>
+            <div class="col-md-8">
+                <h4>
+                  Project Overview:
+                </h4>
+                <p>
+                  Wherever we are, whether in an urban environment or the country, we usually have lots of dog friends around in our life. But how much do you know about them? What kind of breed are they? (e.g. Can you tell the difference between the Field Spaniel (left), Boykin Spaniel (right) below? ) Different dog breeds are probably hard to identify for many people. In this article, we will apply deep learning skills and let computer vision help us with this question.
+                  <br/>
+                  <br>
+                  <center><img src="assets/images/dogbreed_CNN_3.jpg" style="max-width:60%;" alt="Navy Yard landscape projects timeline"></center>
+                  <br/>
+                  <br>
+                  Specifically, I’ll demonstrate how to apply keras and tensor flow to build a Convolutional Neural Network (CNN) from scratch. In addition to training and testing the network, I’ll also explain the concept of transfer learning. A successful model will have at least 80% accuracy on the test set. Now let’s get started!
+                </p>
+                <h4> Step 1: Import datasets </h4>
+                <p>
+                  For the convenience of processing, I’ll load all files into memory.
+                  <br>
+                  <br>
+                  <center><img src="assets/images/dogbreed_CNN_4.jpg" style="max-width:100%;" alt="Navy Yard landscape projects timeline"></center>
+                  <br>
+                  <br>
+                  Then I’ll normalize the data by dividing every pixel by 255 and format the output to a vector processable by keras, which is also known as a tensor.
+                  <br>
+                  <br>
+                  <center><img src="assets/images/dogbreed_CNN_5.jpg" style="max-width:100%;" alt="Navy Yard landscape projects timeline"></center>
+                  <center><img src="assets/images/dogbreed_CNN_6.jpg" style="max-width:100%;" alt="Navy Yard landscape projects timeline"></center>
+                  <br/>
+
+              <h4>Step 2: Let’s create a CNN from scratch</h4>
+              <p>
+                Here is a simple CNN I created using keras with a tensor flow backend. It’s an 8-layer sequential neural network utilizing 3 convolutional layers with pooling layers after each. The final later is a fully connected layer with 133 nodes, each represents a breed I’m trying to predict. The dense layer I use is a softmax activation function because it will give an output range from 0 to 1, and also it makes the sum of all nodes in the output to be 1.
+                <br>
+                <br>
+                <center><img src="assets/images/dogbreed_CNN_7.jpg" style="max-width:100%;" alt="Three different data sources"></center>
+                <br>
+                <br>
+                <center><img src="assets/images/dogbreed_CNN_8.jpg" style="max-width:50%;" alt="Three different data sources"></center>
+                <br>
+                <br>
+                The final step is to compile the model for training.
+                <br>
+                <br>
+                <center><img src="assets/images/dogbreed_CNN_9.jpg" style="max-width:100%;" alt="Three different data sources"></center>
+                <br>
+                <br>
+              <h4> Step 3: Apply the CNN to classify dog breeds </h4>
+                <br>
+                <br>
+                Before I train, validate and test a model, I will create a ModelCheckpoint object, which will be a container storing all the model weights for the use later.
+                <br>
+                <br>
+                <center><img src="assets/images/dogbreed_CNN_10.jpg" style="max-width:100%;" alt="Three different data sources"></center>
+                <br>
+                <br>
+                This model is only used for demonstration, you can see the training accuracy is pretty low.
+                <br>
+                <br>
+                <center><img src="assets/images/dogbreed_CNN_11.jpg" style="max-width:100%;" alt="Three different data sources"></center>
+                <br>
+                <br>
+
+              <h4> Step 4: Using transfer learning </h4>
+                <br>
+                <br>
+                How can we improve the performance of the model in a quick and dirty way? Let’s take advantage of transfer learning. We can leverage an existing CNN which has been pretrained to recognize features from general data sources, and add extra layers to make it easily adapt to our use case.
+                <br>
+                <br>
+                To transfer learning, I will need to freeze the weights and kernels of the convolution layers, and only train the layers I added. This will be the most efficient way. Udacity has already fed all their supplied training images through a few built-in CNNs, and provided the output bottleneck features, I can simply select one and apply directly to the model.
+                </br>
+                <br>
+                As the code shows below, I designed a fully connected network to take the bottleneck features and output 133 nodes for each breed. The final layer is also a softmax activation function.
+                </br>
+                <br>
+                <center><img src="assets/images/dogbreed_CNN_12.jpg" style="max-width:100%;" alt="Three different data sources"></center>
+                <br>
+                <br>
+                <center><img src="assets/images/dogbreed_CNN_13.jpg" style="max-width:100%;" alt="Three different data sources"></center>
+                <br>
+                <br>
+                <center><img src="assets/images/dogbreed_CNN_14.jpg" style="max-width:100%;" alt="Three different data sources"></center>
+                <br>
+                <br>
+                <center><img src="assets/images/dogbreed_CNN_15.jpg" style="max-width:100%;" alt="Three different data sources"></center>
+                <br>
+                <br>
+                <center><img src="assets/images/dogbreed_CNN_16.jpg" style="max-width:100%;" alt="Three different data sources"></center>
+                <br>
+                <br>
+
+              <h4> Step 5: Write and test our algorithm </h4>
+                <br>
+                <br>
+                The accuracy is 80.3% on the test set, which means our model is eighty percent correct when making a prediction!
+                <br>
+                <br>
+                <center><img src="assets/images/dogbreed_CNN_17.jpg" style="max-width:100%;" alt="Three different data sources"></center>
+                <br>
+                <br>
+
+              <h4> Step 6: Refinement and next steps </h4>
+                <br>
+                <br>
+                Although the transferred learning model is working great, there is still something I could keep working on to refine the recognition, for example, augmentation. For the next steps of this study in the future, I could apply random rotations and zooms to the training images to artificially increase the training data size but maintaining the data integrity. This could improve both the model accuracy and also help prevent overfitting.
+                <br>
+                <br>
+
+              <h4>Final Output</h4>
+                <br>
+                <br>
+                The final output of this project will be a function that could tell the dog breed from an input image. The image could be either human or dog, I will apply two detectors accordingly. <a href = "https://github.com/EchoWOO/Dog-Breed-Classifier/tree/master/Test_images">Here</a> are the test images I selected. Feel free to select yours.
+                <br>
+                <br>
+                <center><img src="assets/images/dogbreed_CNN_18.jpg" style="max-width:100%;" alt="Three different data sources"></center>
+                <br>
+                <br>
+                <center><img src="assets/images/dogbreed_CNN_19.jpg" style="max-width:100%;" alt="Three different data sources"></center>
+                <br>
+                <br>
+                If you have been following me in this blog post, how about trying to apply an image of yourself? You will see which breed of dog that looks most similar to you!
+                <br>
+                <br>
+                <center><img src="assets/images/dogbreed_CNN_20.jpg" style="max-width:100%;" alt="Three different data sources"></center>
+                <br>
+                <br>
+
+              </p>
+            <div class="btn-load-more">
+  						<a class="load-more" href="https://github.com/EchoWOO/Dog-Breed-Classifier">Github</a>
+  						<br>
+  						<br>
+            </div>
+
+            <div>
+            <center><div class="fb-comments" data-colorscheme = 'dark' data-mobile data-href="https://echowoo.com/blog_airbnb_price.html" data-width="50%" data-numposts="5"></div><center>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-content">
+      <!-- <div class="container"> -->
+      <!-- <h5 class="item">Leave a reply</h5>
+          <form class="row" action="#">
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <input placeholder="Name" type="text" name="firstname"> <br>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <input placeholder="Email" type="text" name="email"> <br>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <input placeholder="Subject" type="text" name="subject"> <br>
+                            </div>
+                            <div class="col-md-12 form-area">
+                                <textarea placeholder="Message" name="message"></textarea>
+                                <input type="submit" value="Comment">
+                            </div>
+                 </form> -->
+      <!-- </div> -->
+      <!-- <div id='gitalk-container'>
+        <script>
+          const gitalk = new Gitalk({
+            clientID: 'eba23a9f84ea9bdf13f3',
+            clientSecret: '94637ef6a71f0f23ab4d87456d5b0dbee98f22d2',
+            repo: 'EchoWoo.github.io',
+            owner: 'EchoWOO',
+            admin: ['EchoWOO'],
+            id: location.pathname,      // Ensure uniqueness and length less than 50
+            createIssueManually: true,
+            distractionFreeMode: false  // Facebook-like distraction free mode
+          })
+            // reference: https://my.oschina.net/u/3729927/blog/1931115
+          gitalk.render('gitalk-container')
+        </script>
+      </div> -->
+      <!-- <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-width="560" data-include-parent="false" data-numposts="5">
+      </div> -->
+    </div>
+
+
+    <footer>
+      <div class="main-footer">
+        <p> Copyright © 2019 By Xiao WU</p>
+        <p>Made with Bootstrap Jquery.</p>
+        <div class="icons">
+          <ul>
+            <li><a target="_BLANK" href="https://www.linkedin.com/in/xiaowu2018"><i class="fa fa-linkedin"></i> </a></li>
+						<li><a target="_BLANK" href="https://github.com/EchoWOO"><i class="fa fa-github"></i> </a></li>
+						<li><a target="_BLANK" href="https://www.facebook.com/people/Echo-Woo/100008072611716"><i class="fa fa-facebook"></i> </a></li>
+						<li><a target="_BLANK" href="https://twitter.com/EchoWoo1993"><i class="fa fa-twitter"></i></a></li>
+						<!-- <li><a target="_BLANK" href="https://www.instagram.com/echo_xiao_wu/"><i class="fa fa-instagram"></i> </a></li> -->
+						<!-- <li><a target="_BLANK" href="http://behance.net/"><i class="fa fa-behance"></i></a></li> -->
+						<li><a target="_BLANK" href="https://public.tableau.com/profile/xiao.wu#!/"><i class="fa fa-bar-chart"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+      <script src="assets/js/jquery-2.1.4.js"></script>
+      <script src="assets/js/bootstrap.min.js"></script>
+      <script src="assets/js/jquery.slicknav.js"></script>
+      <script src="assets/js/isotope.pkgd.min.js"></script>
+      <script src="assets/js/owl.carousel.js"></script>
+      <script src="assets/js/main.js"></script>
+  </body>
+</html>
